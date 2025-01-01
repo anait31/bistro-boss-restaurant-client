@@ -1,0 +1,10 @@
+.carousel.carousel-slider {
+    height: 100vh;
+}
+.carousel-status {
+    display: none;
+}
+.carousel .thumbs {
+    text-align: center;
+    /* display: none; */
+}
