@@ -2,17 +2,11 @@ import logo from '../../assets/others/mainLogo.png'
 const Header = () => {
 
     const links = <>
-        <li><a>Item 1</a></li>
-        <li>
-            <details>
-                <summary>Parent</summary>
-                <ul className="p-2">
-                    <li><a>Submenu 1</a></li>
-                    <li><a>Submenu 2</a></li>
-                </ul>
-            </details>
-        </li>
-        <li><a>Item 3</a></li>
+        <li><a>Home</a></li>
+        <li><a>CONTACT US</a></li>
+        <li><a>DASHBOARD</a></li>
+        <li><a>OUR MENU</a></li>
+        <li><a>OUR SHOP</a></li>
     </>
     return (
         <div className='text-white fixed bg-black opacity-45 z-10 w-full'>
