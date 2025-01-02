@@ -1,11 +1,12 @@
+import { Link } from 'react-router-dom';
 import logo from '../../assets/others/mainLogo.png'
 const Header = () => {
 
     const links = <>
-        <li><a>Home</a></li>
+        <li><Link to={'/'}>Home</Link></li>
         <li><a>CONTACT US</a></li>
         <li><a>DASHBOARD</a></li>
-        <li><a>OUR MENU</a></li>
+        <li><Link to={'/our-menu'}>OUR MENU</Link></li>
         <li><a>OUR SHOP</a></li>
     </>
     return (
