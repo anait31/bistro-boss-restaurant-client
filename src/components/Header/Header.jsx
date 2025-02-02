@@ -7,7 +7,7 @@ const Header = () => {
         <li><a>CONTACT US</a></li>
         <li><a>DASHBOARD</a></li>
         <li><Link to={'/our-menu'}>OUR MENU</Link></li>
-        <li><Link to={'/order'}>ORDER FOOD</Link></li>
+        <li><Link to={'/order/salad'}>ORDER FOOD</Link></li>
     </>
     return (
         <div className='text-white fixed bg-black opacity-45 z-10 w-full'>

@@ -3,6 +3,9 @@ import Cover from "../../../shared/Cover/Cover";
 import Menu from "../../../shared/Menu/Menu";
 
 const MenuCategory = ({ items, bgImage, description, title }) => {
+    // if(!title){
+    //     return 'Loading'
+    // }
     return (
         <div className="">
             {title && <Cover bgImage={bgImage} title={title} description={description}></Cover>}
