@@ -8,6 +8,8 @@ const Header = () => {
         <li><a>DASHBOARD</a></li>
         <li><Link to={'/our-menu'}>OUR MENU</Link></li>
         <li><Link to={'/order/salad'}>ORDER FOOD</Link></li>
+        <li><Link to={'/login'}>LOGIN</Link></li>
+        <li><Link to={'/register'}>REGISTER</Link></li>
     </>
     return (
         <div className='text-white fixed bg-black opacity-45 z-10 w-full'>
