@@ -4,12 +4,12 @@ const Header = () => {
 
     const links = <>
         <li><Link to={'/'}>HOME</Link></li>
-        <li><a>CONTACT US</a></li>
-        <li><a>DASHBOARD</a></li>
         <li><Link to={'/our-menu'}>OUR MENU</Link></li>
         <li><Link to={'/order/salad'}>ORDER FOOD</Link></li>
-        <li><Link to={'/login'}>LOGIN</Link></li>
+        <li><a>CONTACT US</a></li>
+        {/* <li><Link to={'/login'}>LOGIN</Link></li> */}
         <li><Link to={'/register'}>REGISTER</Link></li>
+        <li><a>DASHBOARD</a></li>
     </>
     return (
         <div className='text-white fixed bg-black opacity-45 z-10 w-full'>
@@ -44,7 +44,7 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+                    <Link to={'/login'}>LOGIN</Link>
                 </div>
             </div>
         </div>

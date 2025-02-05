@@ -1,14 +1,48 @@
+import { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { authContext } from "../../providers/AuthProviders";
 
 const Login = () => {
+    const { loginUser, googleLogin } = useContext(authContext);
+    const navigate = useNavigate()
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        loginUser(email, password)
+            .then(result => {
+                const user = result.user;
+                navigate('/')
+                console.log(user);
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+
+    }
+
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then(result => {
+                const user = result.user;
+                navigate('/')
+                console.log(user);
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+    }
+
     return (
         <div className="w-1/5 mx-auto content-center h-screen">
             <div>
                 <h2 className="text-3xl font-semibold text-center mb-2 uppercase">Login</h2>
                 <p className="text-center mb-6">Welcome to Bistro Boss Restaurant</p>
                 <div>
-                    <form className="space-y-3">
+                    <form onSubmit={handleLogin} className="space-y-3">
                         <label className="input input-bordered flex items-center gap-2">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +72,7 @@ const Login = () => {
                         <button className="btn btn-block">Sign In</button>
                     </form>
                     <div className="text-center my-4">Signip with social accounts</div>
-                    <button className="btn btn-block"><FcGoogle className="text-4xl"></FcGoogle>Continue with Google</button>
+                    <button onClick={handleGoogleLogin} className="btn btn-block"><FcGoogle className="text-4xl"></FcGoogle>Continue with Google</button>
                     <p className="text-center mt-3">Already have an account? <Link className="text-blue-500 font-bold" to={'/register'}>Sign Up</Link></p>
                 </div>
             </div>
