@@ -1,7 +1,27 @@
+import { useEffect, useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 
 const Register = () => {
+    const captchaRef = useRef();
+    const [disabled, setDisabled] = useState(true)
+
+    useEffect(() => {
+        loadCaptchaEnginge(6);
+    }, [])
+
+    const handleCaptcha = () => {
+        const captchaValue = captchaRef.current.value
+        console.log(captchaValue);
+        if (validateCaptcha(captchaValue)) {
+            setDisabled(false)
+        }
+        else {
+            setDisabled(true)
+        }
+    }
+
     return (
         <div className="w-1/5 mx-auto content-center h-screen">
             <div>
@@ -47,7 +67,13 @@ const Register = () => {
                             </svg>
                             <input type="password" name="password" placeholder="Password" className="grow" />
                         </label>
-                        <button className="btn btn-block">Sign Up</button>
+                        <div>
+                            <label>
+                                <LoadCanvasTemplate></LoadCanvasTemplate>
+                            </label>
+                            <input onBlur={handleCaptcha} ref={captchaRef} type="text" name="captcha" placeholder="Type Captcha" className="grow w-full input input-bordered" />
+                        </div>
+                        <button disabled={disabled} className="btn btn-block">Sign Up</button>
                     </form>
                     <div className="text-center my-4">Signup with social accounts</div>
                     <button className="btn btn-block"><FcGoogle className="text-4xl"></FcGoogle>Continue with Google</button>

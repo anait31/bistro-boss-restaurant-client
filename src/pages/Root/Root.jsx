@@ -4,7 +4,6 @@ import Header from "../../components/Header/Header";
 
 const Root = () => {
     const location = useLocation();
-    console.log(location);
     const loginNoHeaderFooter = location.pathname.includes('login')
     const registerNoHeaderFooter = location.pathname.includes('register')
     return (
