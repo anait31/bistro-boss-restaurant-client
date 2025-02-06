@@ -8,8 +8,8 @@ import { authContext } from "../../providers/AuthProviders";
 const Register = () => {
     const captchaRef = useRef();
     const [disabled, setDisabled] = useState(true);
-    const {register, handleSubmit, formState: { errors }} = useForm();
-    const { registerUser } = useContext(authContext);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { registerUser, updateUserDetails } = useContext(authContext);
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -30,10 +30,17 @@ const Register = () => {
     const onSubmit = (data) => {
         console.log(data);
         registerUser(data.email, data.password)
-            .then(result => {
-                const user = result.user;
-                navigate('/')
-                console.log(user);
+            .then((result) => {
+                updateUserDetails(data.name, data.photoURL)
+                    .then(() => {
+                        const user = result?.user;
+                        console.log(user);
+                        navigate('/');
+                    })
+                    .catch(error=> {
+                        console.log(error);
+                    })
+
             })
             .catch(error => {
                 console.log(error.message);
