@@ -6,7 +6,8 @@ import { authContext } from "../../providers/AuthProviders";
 const Login = () => {
     const { loginUser, googleLogin } = useContext(authContext);
     const navigate = useNavigate();
-    const location = useLocation()
+    const location = useLocation();
+    const from = location.state || '/'
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -16,7 +17,7 @@ const Login = () => {
         loginUser(email, password)
             .then(result => {
                 const user = result.user;
-                navigate(location.state)
+                navigate(from)
                 console.log(user);
             })
             .catch(error => {
@@ -29,7 +30,7 @@ const Login = () => {
         googleLogin()
             .then(result => {
                 const user = result.user;
-                navigate(location.state)
+                navigate(from)
                 console.log(user);
             })
             .catch(error => {
