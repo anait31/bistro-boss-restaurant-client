@@ -8,6 +8,7 @@ import Order from "../pages/Order/Order";
 import ErrorPages from "../pages/ErrorPages/ErrorPages";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import PrivateRoutes from "./PrivateRoutes";
 
   export const router = createBrowserRouter([
     {
