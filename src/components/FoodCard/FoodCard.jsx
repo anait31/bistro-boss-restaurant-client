@@ -3,13 +3,15 @@ import useAuth from "../../hooks/useMenu/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import userCart from "../../hooks/userCart";
 
 const FoodCard = ({ item }) => {
     const { image, recipe, name, price, _id } = item;
     const { user } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-    const axiosSecure = useAxiosSecure()
+    const axiosSecure = useAxiosSecure();
+    const [, refetch] = userCart()
 
     const handleAddToCart = item => {
         if (user && user.email) {
@@ -31,6 +33,7 @@ const FoodCard = ({ item }) => {
                             showConfirmButton: false,
                             timer: 1500
                         });
+                        refetch()
                     }
                 })
         }
