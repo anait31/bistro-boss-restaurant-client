@@ -26,10 +26,10 @@ const Header = () => {
         {/* <li><Link to={'/login'}>LOGIN</Link></li> */}
         <li><Link to={'/register'}>REGISTER</Link></li>
         <li><a>DASHBOARD</a></li>
-        <li><button className="">
+        <li><Link to={'/dashboard/cart'} className="">
             CART
             <div className="badge badge-secondary">+{cart.length}</div>
-        </button></li>
+        </Link></li>
     </>
     return (
         <div className='text-white fixed bg-black opacity-45 z-10 w-full'>
