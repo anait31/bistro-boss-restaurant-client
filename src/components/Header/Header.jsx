@@ -2,18 +2,20 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/others/mainLogo.png'
 import { useContext } from 'react';
 import { authContext } from '../../providers/AuthProviders';
+import userCart from '../../hooks/userCart';
 const Header = () => {
 
-    const {user, logoutUser} = useContext(authContext);
+    const { user, logoutUser } = useContext(authContext);
+    const [cart] = userCart()
 
     const handleLogout = () => {
         logoutUser()
-        .then(() => {
+            .then(() => {
 
-        })
-        .catch(error => {
-            console.log(error)
-        })
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     const links = <>
@@ -24,6 +26,10 @@ const Header = () => {
         {/* <li><Link to={'/login'}>LOGIN</Link></li> */}
         <li><Link to={'/register'}>REGISTER</Link></li>
         <li><a>DASHBOARD</a></li>
+        <li><button className="">
+            CART
+            <div className="badge badge-secondary">+{cart.length}</div>
+        </button></li>
     </>
     return (
         <div className='text-white fixed bg-black opacity-45 z-10 w-full'>
@@ -59,7 +65,7 @@ const Header = () => {
                 </div>
                 <div className="navbar-end">
                     {user ? <button onClick={handleLogout}>LOGOUT</button> :
-                    <Link to={'/login'}>LOGIN</Link>}
+                        <Link to={'/login'}>LOGIN</Link>}
                 </div>
             </div>
         </div>
