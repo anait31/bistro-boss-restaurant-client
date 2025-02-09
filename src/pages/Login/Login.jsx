@@ -2,12 +2,14 @@ import { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { authContext } from "../../providers/AuthProviders";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Login = () => {
     const { loginUser, googleLogin } = useContext(authContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/'
+    const axiosPublic = useAxiosPublic()
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -29,9 +31,18 @@ const Login = () => {
     const handleGoogleLogin = () => {
         googleLogin()
             .then(result => {
-                const user = result.user;
-                navigate(from)
-                console.log(user);
+                const userInfo = {
+                    name: result.user.displayName,
+                    email: result.user.email
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        // const user = result.user;
+                        navigate(from)
+                        // console.log(user);
+                        console.log(res.data);
+                    })
+
             })
             .catch(error => {
                 console.log(error.message);
