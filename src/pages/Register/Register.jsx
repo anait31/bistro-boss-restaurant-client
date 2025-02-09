@@ -4,13 +4,15 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { authContext } from "../../providers/AuthProviders";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Register = () => {
     const captchaRef = useRef();
     const [disabled, setDisabled] = useState(true);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { registerUser, updateUserDetails } = useContext(authContext);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic()
 
     useEffect(() => {
         loadCaptchaEnginge(6);
@@ -33,11 +35,21 @@ const Register = () => {
             .then((result) => {
                 updateUserDetails(data.name, data.photoURL)
                     .then(() => {
-                        const user = result?.user;
-                        console.log(user);
-                        navigate('/');
+                        const userInfo = {
+                            name: data.name,
+                            email: data.email
+                        }
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    const user = result?.user;
+                                    console.log(user);
+                                    navigate('/');
+                                }
+                            })
+
                     })
-                    .catch(error=> {
+                    .catch(error => {
                         console.log(error);
                     })
 
