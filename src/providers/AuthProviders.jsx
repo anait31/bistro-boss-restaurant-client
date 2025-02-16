@@ -43,7 +43,7 @@ const AuthProviders = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
             if (currentUser) {
-                const userInfo = { emai: currentUser.email }
+                const userInfo = { email: currentUser.email }
                 axiosPublic.post('/jwt', userInfo)
                     .then(res => {
                         if (res.data.token) {
