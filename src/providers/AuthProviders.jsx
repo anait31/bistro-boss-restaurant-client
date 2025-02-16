@@ -43,8 +43,6 @@ const AuthProviders = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
             if (currentUser) {
-                // Get Token and Store client
-                
                 const userInfo = { emai: currentUser.email }
                 axiosPublic.post('/jwt', userInfo)
                     .then(res => {
@@ -54,7 +52,6 @@ const AuthProviders = ({ children }) => {
                     })
             }
             else {
-                // Remove Token
                 localStorage.removeItem('access-token')
             }
             console.log(currentUser)
@@ -63,7 +60,7 @@ const AuthProviders = ({ children }) => {
         return () => {
             return unsubscribe()
         }
-    }, [])
+    }, [axiosPublic])
 
     const authInfo = {
         user,

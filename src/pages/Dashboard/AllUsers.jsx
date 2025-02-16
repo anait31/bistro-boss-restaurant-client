@@ -10,7 +10,14 @@ const AllUsers = () => {
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/users')
+            const res = await axiosSecure.get('/users',
+                // Send Token to Backend
+                // {
+                //     headers: {
+                //         authorization: `Bearer ${localStorage.getItem('access-token')}`
+                //     }
+                // }
+            )
             return res.data
         }
     })
@@ -95,7 +102,7 @@ const AllUsers = () => {
                                 <td>{user.name}</td>
                                 <td>{
                                     user.role === 'admin' ? 'Admin' : <button onClick={() => handleUpdateUser(user)} className="text-2xl"><FaUsersCog></FaUsersCog></button>
-                                    }</td>
+                                }</td>
                                 <td><button onClick={() => handleDeleteUser(user)} className="text-2xl"><MdAutoDelete></MdAutoDelete></button></td>
                             </tr>)
                         }
